@@ -29,6 +29,10 @@ char *get_weather_url()
 		printf("FATAL: No memory left, exiting...");
 		exit(1);
 	}
+
+	// read the file and close it
+	fread(weather_url, 1, length, url_file);
+	fclose(url_file)
     
 }
 
