@@ -15,7 +15,7 @@ char *get_weather_url()
     
     // exit if the file does not exist
     if(url_file == NULL) {
-        printf("FATAL: Cannot load weather_url, exiting...");
+        printf("FATAL: Cannot load weather_url, exiting...\n");
         exit(1);
 	}
 
@@ -26,13 +26,15 @@ char *get_weather_url()
 
 	// exit if memory cannot be allocated 
 	if(weather_url == NULL) {
-		printf("FATAL: No memory left, exiting...");
+		printf("FATAL: No memory left, exiting...\n");
 		exit(1);
 	}
 
 	// read the file and close it
 	fread(weather_url, 1, length, url_file);
 	fclose(url_file);
+
+	printf("%s\n", *weather_url); // debug
 
 	return weather_url;
 }
