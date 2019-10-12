@@ -32,8 +32,9 @@ char *get_weather_url()
 
 	// read the file and close it
 	fread(weather_url, 1, length, url_file);
-	fclose(url_file)
-    
+	fclose(url_file);
+
+	return weather_url;
 }
 
 
