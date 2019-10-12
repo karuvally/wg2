@@ -7,21 +7,28 @@
 char *get_weather_url()
 {
 	// essential variables
-	char *buffer = 0;
+	char *weather_url = 0;
 	int length;
 
     // open the file
-    FILE *url_file = fopen("weather_url", "r");
+    FILE *url_file = fopen("weather_url", "rb");
     
     // exit if the file does not exist
     if(url_file == NULL) {
-        printf("cannot load weather_url, exiting...");
+        printf("FATAL: Cannot load weather_url, exiting...");
         exit(1);
 	}
 
-	// get the length of the file
+	// allocate memory to load the file 
 	fseek(url_file, 0, SEEK_END);
 	length = ftell(url_file);
+	weather_url = malloc(length);
+
+	// exit if memory cannot be allocated 
+	if(weather_url == NULL) {
+		printf("FATAL: No memory left, exiting...");
+		exit(1);
+	}
     
 }
 
