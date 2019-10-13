@@ -11,7 +11,7 @@ char *get_weather_url()
 	int length;
 
     // open the file
-    FILE *url_file = fopen("weather_url", "rb");
+    FILE *url_file = fopen("weather_url", "r");
     
     // exit if the file does not exist
     if(url_file == NULL) {
@@ -31,10 +31,8 @@ char *get_weather_url()
 	}
 
 	// read the file and close it
-	fread(weather_url, 1, length, url_file);
+	fread(weather_url, length, 1, url_file);
 	fclose(url_file);
-
-	printf("%s\n", *weather_url); // debug
 
 	return weather_url;
 }
