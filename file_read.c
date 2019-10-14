@@ -9,7 +9,7 @@ void read_from_file(char file_path[])
 	// essential variables
 	FILE *file_pointer;
 	long file_length;
-	char buffer[100];
+	char *buffer = 0;
 
 	// open the file
 	file_pointer = fopen(file_path, "r");
@@ -19,14 +19,16 @@ void read_from_file(char file_path[])
 		exit(1);
 	}
 
-	// get the file length
+	// allocate memory to load the file
 	fseek(file_pointer, 0, SEEK_END);
 	file_length = ftell(file_pointer);
 	fseek(file_pointer, 0, SEEK_SET);
+	buffer = malloc(file_length);
 
 	// read from file
-	fread(buffer, sizeof(char), 50, file_pointer);
-	buffer[50] = '\0';
+	fread(buffer, sizeof(char), file_length, file_pointer);
+	fclose(file_pointer);
+	//buffer[file_length] = '\0';
 
 	// debug
 	printf("%s\n", buffer);
