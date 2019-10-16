@@ -16,6 +16,7 @@ void read_from_file(char file_path[])
 
 	//exit if file does not exist
 	if(file_pointer == NULL) {
+		printf("FATAL: The file %s does not exist, exiting...\n", file_path);
 		exit(1);
 	}
 
@@ -24,6 +25,12 @@ void read_from_file(char file_path[])
 	file_length = ftell(file_pointer);
 	fseek(file_pointer, 0, SEEK_SET);
 	buffer = malloc(file_length);
+
+	// exit if memory cannot be allocated
+	if(buffer == NULL) {
+		printf("FATAL: No memory left, exiting...\n");
+		exit(1);
+	}
 
 	// read from file
 	fread(buffer, sizeof(char), file_length, file_pointer);
