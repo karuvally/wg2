@@ -50,7 +50,7 @@ char *read_from_file(char file_path[])
 char *get_url(char url[])
 {
 	//essential variables
-	char *url_contents[];
+	char *url_contents = 0;
 
 	// initialize CURL
 	curl_global_init(CURL_GLOBAL_ALL);
