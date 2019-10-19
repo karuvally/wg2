@@ -50,21 +50,30 @@ char *read_from_file(char file_path[])
 char *get_url(char url[])
 {
 	//essential variables
-	char *url_contents = 0;
+	char *buffer = 0;
 
 	// initialize CURL
-	curl_global_init(CURL_GLOBAL_ALL);
 	CURL *curl_handle;
 	CURLcode result;
 	curl_handle = curl_easy_init();
+
+	// fetch the URL
+	curl_easy_setopt(curl_handle, CURLOPT_URL, url);
+	result = curl_easy_perform(curl_handle);
+
+	// return whatever is fetched
+	return buffer;
 }
 
 
 // the main function
 int main()
 {
-	// read weather fetch string from file
+	// read weather API string from file
 	char *weather_url = read_from_file("weather_url");
+
+	// fetch the weather data
+	char *weather_data = get_url(weather_url);
 
 	// just quit :D
 	return 0;
