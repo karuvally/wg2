@@ -61,6 +61,10 @@ char *get_url(char url[])
 	curl_easy_setopt(curl_handle, CURLOPT_URL, url);
 	result = curl_easy_perform(curl_handle);
 
+	// print error if something went wrong
+	if(result != CURLE_OK)
+		printf("FATAL: CURL returned error %d\n", result);
+
 	// return whatever is fetched
 	return buffer;
 }
