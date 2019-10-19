@@ -46,20 +46,26 @@ char *read_from_file(char file_path[])
 }
 
 
+// initialize curl
+char *get_url(char url[])
+{
+	//essential variables
+	char *url_contents[];
+
+	// initialize CURL
+	curl_global_init(CURL_GLOBAL_ALL);
+	CURL *curl_handle;
+	CURLcode result;
+	curl_handle = curl_easy_init();
+}
+
+
 // the main function
 int main()
 {
-	// read weather URL from file
+	// read weather fetch string from file
 	char *weather_url = read_from_file("weather_url");
 
-	/*
-    // initialize curl
-	curl_global_init(CURL_GLOBAL_ALL);
-    CURL *curl_handle;
-    CURLcode result;
-    curl_handle = curl_easy_init();
-	*/
-    
 	// just quit :D
 	return 0;
 }
