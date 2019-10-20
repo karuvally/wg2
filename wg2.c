@@ -31,6 +31,12 @@ int write_mem_callback(
 		data_ptr->size + actual_size + 1
 	);
 
+	// quit if memory can't be allocated
+	if(allocated_mem == NULL) {
+		printf("FATAL: No memory left, exiting...\n");
+		exit(1);
+	}
+
 	// assign the reallocated memory,
 	data_ptr->memory = allocated_mem;
 
