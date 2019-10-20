@@ -7,6 +7,14 @@
 #include<curl/curl.h>
 
 
+// allocate memory to store retrieved data 
+int write_memory_callback(char *contents, size_t size, size_t nmemb, void *buffer)
+{
+	// return zero?
+	return 0;
+}
+
+
 // read data from file 
 char *read_from_file(char file_path[])
 {
