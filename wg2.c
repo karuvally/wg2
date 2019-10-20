@@ -8,9 +8,11 @@
 
 
 // allocate memory to store retrieved data 
-int write_memory_callback(char *contents, size_t size, size_t nmemb, void *buffer)
+int write_mem_callback(char *buffer, size_t size, size_t no_members, void *fetched_data)
 {
-	// return zero?
+	// allocate memory if not yet allocated
+	
+	// return 0 if everything goes according to plan 
 	return 0;
 }
 
@@ -58,15 +60,19 @@ char *read_from_file(char file_path[])
 char *get_url(char *url)
 {
 	//essential variables
-	char *buffer = 0;
+	char *fetched_data = 0;
 
-	// initialize CURL
+	// initialize curl 
 	CURL *curl_handle;
 	CURLcode result;
 	curl_handle = curl_easy_init();
 
-	// fetch the URL
+	// specify what we want curl to do 
 	curl_easy_setopt(curl_handle, CURLOPT_URL, url);
+	curl_easy_setopt(curl_handle, CURLOPT_WRITEFUNCTION, write_mem_callback);
+	curl_easy_setopt(curl_handle, CURLOPT_WRITEDATA, (void *)&fetched_data);
+
+	// fetch the data 
 	result = curl_easy_perform(curl_handle);
 
 	// print error if something went wrong
@@ -74,7 +80,7 @@ char *get_url(char *url)
 		printf("FATAL: CURL returned error %d\n", result);
 
 	// return whatever is fetched
-	return buffer;
+	return fetched_data;
 }
 
 
