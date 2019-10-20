@@ -7,6 +7,13 @@
 #include<curl/curl.h>
 
 
+// structure to store fetched data
+struct data {
+	char *memory;
+	size_t size;
+};
+
+
 // allocate memory to store retrieved data 
 int write_mem_callback(char *buffer, size_t size, size_t no_members, void *fetched_data)
 {
@@ -23,7 +30,7 @@ char *read_from_file(char file_path[])
 	// essential variables
 	FILE *file_pointer;
 	long file_length;
-	char *buffer = 0;
+	char *buffer = NULL;
 
 	// open the file
 	file_pointer = fopen(file_path, "r");
@@ -57,10 +64,12 @@ char *read_from_file(char file_path[])
 
 
 // initialize curl
-char *get_url(char *url)
+struct data get_url(char *url)
 {
-	//essential variables
-	char *fetched_data = 0;
+	// setup struct to store fetched data
+	struct data fetched_data;
+	fetched_data.memory = malloc(1);
+	fetched_data.size = 0;
 
 	// initialize curl 
 	CURL *curl_handle;
@@ -91,7 +100,7 @@ int main()
 	char *weather_url = read_from_file("weather_url");
 
 	// fetch the weather data
-	char *weather_data = get_url(weather_url);
+	struct data weather_data = get_url(weather_url);
 
 	// just quit :D
 	return 0;
