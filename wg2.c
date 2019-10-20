@@ -15,9 +15,20 @@ struct data {
 
 
 // allocate memory to store retrieved data 
-int write_mem_callback(char *buffer, size_t size, size_t no_members, void *fetched_data)
-{
-	// allocate memory if not yet allocated
+int write_mem_callback(
+	char *buffer,
+	size_t size,
+	size_t no_members,
+	void *fetched_data
+){
+	// allocate required amount of memory
+	size_t actual_size = size * no_members;
+	struct data *data_ptr = (struct data *)fetched_data;
+
+	char *allocated_mem = realloc(
+		data_ptr->memory,
+		data_ptr->size + actual_size + 1
+	);
 	
 	// return 0 if everything goes according to plan 
 	return 0;
