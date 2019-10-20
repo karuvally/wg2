@@ -28,7 +28,7 @@ char *read_from_file(char file_path[])
 	fseek(file_pointer, 0, SEEK_END);
 	file_length = ftell(file_pointer);
 	fseek(file_pointer, 0, SEEK_SET);
-	buffer = malloc(file_length);
+	buffer = malloc(file_length + 1);
 
 	// exit if memory cannot be allocated
 	if(buffer == NULL) {
@@ -60,13 +60,6 @@ char *get_url(char *url)
 	// fetch the URL
 	curl_easy_setopt(curl_handle, CURLOPT_URL, url);
 	result = curl_easy_perform(curl_handle);
-
-	// debug
-	int i=0;
-	do {
-		printf("%c\n", url[i]);
-		i++;
-	} while(url[i] != '\0');
 
 	// print error if something went wrong
 	if(result != CURLE_OK)
