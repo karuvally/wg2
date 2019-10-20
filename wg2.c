@@ -29,9 +29,14 @@ int write_mem_callback(
 		data_ptr->memory,
 		data_ptr->size + actual_size + 1
 	);
+
+	data_ptr->memory = allocated_mem;
+	memcpy(&(data_ptr->memory[data_ptr->size]), buffer, actual_size);
+	data_ptr->size += actual_size;
+	data_ptr->memory[data_ptr->size] = 0;
 	
-	// return 0 if everything goes according to plan 
-	return 0;
+	// return actual_size if everything goes according to plan 
+	return actual_size;
 }
 
 
