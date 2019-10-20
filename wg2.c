@@ -31,7 +31,10 @@ int write_mem_callback(
 		data_ptr->size + actual_size + 1
 	);
 
+	// assign the reallocated memory,
 	data_ptr->memory = allocated_mem;
+
+	// copy newly fetched chunk to existing data
 	memcpy(&(data_ptr->memory[data_ptr->size]), buffer, actual_size);
 	data_ptr->size += actual_size;
 	data_ptr->memory[data_ptr->size] = 0;
@@ -118,6 +121,8 @@ int main()
 
 	// fetch the weather data
 	struct data weather_data = get_url(weather_url);
+
+	printf("%s\n", weather_data.memory); // debug
 
 	// just quit :D
 	return 0;
