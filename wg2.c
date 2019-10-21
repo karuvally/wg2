@@ -5,6 +5,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<curl/curl.h>
+#include<jansson.h>
 #include<string.h>
 
 
@@ -116,6 +117,17 @@ struct data get_url(char *url)
 
 	// return whatever is fetched
 	return fetched_data;
+}
+
+
+// process the retrieved JSON
+json_t *parse_json(struct data weather_data)
+{
+	// essential variables
+	json_t *root;
+
+	// return the parsed JSON
+	return root;
 }
 
 
