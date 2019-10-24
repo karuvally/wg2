@@ -44,7 +44,7 @@ int write_mem_callback(
 	// copy newly fetched chunk to existing data
 	memcpy(&(data_ptr->memory[data_ptr->size]), buffer, actual_size);
 	data_ptr->size += actual_size;
-	data_ptr->memory[data_ptr->size] = 0;
+	data_ptr->memory[data_ptr->size] = '\0';
 	
 	// return actual_size if everything goes according to plan 
 	return actual_size;
@@ -83,7 +83,6 @@ char *read_from_file(char file_path[])
 	// read from file
 	fgets(buffer, file_length, file_pointer);
 	fclose(file_pointer);
-	//buffer[file_length] = '\0';
 	
 	// return stuff
 	return buffer;
@@ -121,13 +120,18 @@ struct data get_url(char *url)
 
 
 // process the retrieved JSON
-json_t *parse_json(struct data weather_data)
+json_t *parse_json(char *data_string)
 {
 	// essential variables
-	json_t *root;
+	json_t *parsed_json;
+	json_error_t error; 
+
+	// parse JSON and deallocate data_string 
+	parsed_json = json_loads(data_string, 0, &error);
+	free(data_string);
 
 	// return the parsed JSON
-	return root;
+	return parsed_json;
 }
 
 
@@ -140,7 +144,12 @@ int main()
 	// fetch the weather data
 	struct data weather_data = get_url(weather_url);
 
-	printf("%s\n", weather_data.memory); // debug
+	// debug
+	printf("%d\n", weather_data.size);
+	printf("%c\n", weather_data.memory[645]);
+
+	// parse the JSON
+	json_t *weather_json = parse_json(weather_data.memory);
 
 	// just quit :D
 	return 0;

@@ -1,2 +1,2 @@
 wg2: wg2.c
-	gcc -lcurl wg2.c -o wg2 
+	gcc -lcurl -ljansson wg2.c -o wg2 
