@@ -158,6 +158,9 @@ int main()
 	// parse the retrieved string into JSON array
 	json_t *weather_json = parse_json(weather_string);
 
+	// print weather info to stdout
+	print_weather_info(weather_json);
+
 	// just quit :D
 	return 0;
 }
