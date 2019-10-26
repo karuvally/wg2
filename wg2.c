@@ -138,6 +138,19 @@ json_t *parse_json(char *data_string)
 // print the weather_info
 int print_weather_info(json_t *weather_json)
 {
+	// essential variables
+	json_t *data, *temperature;
+
+	// retrieve data contained in JSON array
+	data = json_object_get(weather_json, "data"); 
+	temperature = json_object_get(data, "temp");
+
+	// debug
+	if(!json_is_object(data)) {
+		printf("FATAL: Invalid JSON object\n");
+		exit(1);
+	}
+	
 	// return 0 if everything goes write
 	return 0;
 }
@@ -155,7 +168,7 @@ int main()
 	// fetch the weather data
 	char *weather_string = get_url(weather_url);
 
-	// parse the retrieved string into JSON array
+	// create json object out of the retrieved data
 	json_t *weather_json = parse_json(weather_string);
 
 	// print weather info to stdout
