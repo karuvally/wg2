@@ -135,6 +135,14 @@ json_t *parse_json(char *data_string)
 }
 
 
+// print the weather_info
+int print_weather_info(json_t *weather_json)
+{
+	// return 0 if everything goes write
+	return 0;
+}
+
+
 // the main function
 int main()
 {
@@ -145,7 +153,10 @@ int main()
 	char *weather_url = read_from_file("weather_url");
 
 	// fetch the weather data
-	char *weather_data = get_url(weather_url);
+	char *weather_string = get_url(weather_url);
+
+	// parse the retrieved string into JSON array
+	json_t *weather_json = parse_json(weather_string);
 
 	// just quit :D
 	return 0;
