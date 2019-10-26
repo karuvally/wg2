@@ -130,6 +130,11 @@ json_t *parse_json(char *data_string)
 	parsed_json = json_loads(data_string, 0, &error);
 	free(data_string);
 
+	if(!parsed_json) {
+		printf("FATAL: JSON cannot be parsed!");
+		exit(1);
+	}
+
 	// return the parsed JSON
 	return parsed_json;
 }
@@ -143,9 +148,8 @@ int print_weather_info(json_t *weather_json)
 
 	// retrieve data contained in JSON array
 	data = json_object_get(weather_json, "data"); 
-	temperature = json_object_get(data, "temp");
 
-	// debug
+	// quit if there is something wrong 
 	if(!json_is_object(data)) {
 		printf("FATAL: Invalid JSON object\n");
 		exit(1);
