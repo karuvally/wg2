@@ -90,7 +90,7 @@ char *read_from_file(char file_path[])
 
 
 // initialize curl
-struct data get_url(char *url)
+char *get_url(char *url)
 {
 	// setup struct to store fetched data
 	struct data fetched_data;
@@ -115,7 +115,7 @@ struct data get_url(char *url)
 		printf("FATAL: CURL returned error %d\n", result);
 
 	// return whatever is fetched
-	return fetched_data;
+	return fetched_data.memory;
 }
 
 
@@ -138,18 +138,14 @@ json_t *parse_json(char *data_string)
 // the main function
 int main()
 {
+	// essential variables
+	const char *message_text;
+
 	// read weather API string from file
 	char *weather_url = read_from_file("weather_url");
 
 	// fetch the weather data
-	struct data weather_data = get_url(weather_url);
-
-	// debug
-	printf("%d\n", weather_data.size);
-	printf("%c\n", weather_data.memory[645]);
-
-	// parse the JSON
-	json_t *weather_json = parse_json(weather_data.memory);
+	char *weather_data = get_url(weather_url);
 
 	// just quit :D
 	return 0;
