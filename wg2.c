@@ -4,9 +4,9 @@
 // import the serious stuff
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include<curl/curl.h>
 #include<jansson.h>
-#include<string.h>
 
 
 // structure to store fetched data
@@ -154,7 +154,7 @@ int print_weather_info(json_t *weather_json)
 	// get the temperature 
 	temp_object = json_object_get(weather, "temp");
 	temperature = json_real_value(temp_object);
-	printf("%f\n", temperature);
+	printf("%0.1f\n", temperature);
 
 	// return 0 if everything goes write
 	return 0;
