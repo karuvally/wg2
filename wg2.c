@@ -153,7 +153,7 @@ int print_weather_info(json_t *weather_json)
 
 	// get the temperature 
 	temp_object = json_object_get(weather, "temp");
-	temperature = json_real_value(temp_object);
+	temperature = (double)json_number_value(temp_object);
 	printf("%0.1f\n", temperature);
 
 	// return 0 if everything goes write
