@@ -172,7 +172,7 @@ int print_weather_info(json_t *weather_json)
 	tmp_object = json_object_get(tmp_object, "description");
 	condition = json_string_value(tmp_object);
 
-	// get AQI
+	// get Air Quality Index 
 	tmp_object = json_object_get(weather, "aqi");
 	aqi = json_integer_value(tmp_object);
 
