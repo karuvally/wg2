@@ -171,9 +171,9 @@ int print_weather_info(json_t *weather_json)
 	condition = json_string_value(tmp_object);
 
 	// print stuff
-	printf("City:\t%s,%s\n", city, country);
-	printf("Temp:\t%0.1f\n", temperature);
-	printf("Condition:\t%s\n", condition);
+	printf("City: %s,%s\n", city, country);
+	printf("Temp: %0.1f\n", temperature);
+	printf("Condition: %s\n", condition);
 
 	// return 0 if everything goes write
 	return 0;
