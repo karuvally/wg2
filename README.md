@@ -6,6 +6,11 @@ weather-get was my first useful Python program.
 It fetched data using the wunderground API. wg2 is an attempt to rewrite the
 original app in pure C. And that's it, there is not much more to it :D
 
+## Getting Started
+- Register at Weatherbit[http://weatherbit.io] and get the API key
+- Update the file weather_url with city, country and your API key
+- Run ./wg2 to get the current weather!
+
 ## Roadmap
 - Make forecast available
 - Proper makefile
