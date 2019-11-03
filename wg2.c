@@ -159,11 +159,13 @@ int print_weather_info(json_t *weather_json)
 	// get city, print both city and country
 	tmp_object = json_object_get(weather, "city_name");
 	city = json_string_value(tmp_object);
-	printf("City:\t%s,%s\n", city, country);
 
 	// get the temperature 
 	tmp_object = json_object_get(weather, "temp");
 	temperature = json_number_value(tmp_object);
+
+	// print stuff
+	printf("City:\t%s,%s\n", city, country);
 	printf("Temp:\t%0.1f\n", temperature);
 
 	// return 0 if everything goes write
