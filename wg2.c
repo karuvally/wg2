@@ -146,6 +146,7 @@ int print_weather_info(json_t *weather_json)
 	// essential variables
 	json_t *data, *weather, *tmp_object;
 	double temperature;
+	double uv;
 	const char *city, *country;
 	const char *condition;
 
@@ -170,10 +171,15 @@ int print_weather_info(json_t *weather_json)
 	tmp_object = json_object_get(tmp_object, "description");
 	condition = json_string_value(tmp_object);
 
+	// get UV index
+	tmp_object = json_object_get(weather, "uv");
+	uv = json_number_value(tmp_object);
+
 	// print stuff
 	printf("City: %s,%s\n", city, country);
 	printf("Temp: %0.1f\n", temperature);
 	printf("Condition: %s\n", condition);
+	printf("UV Index %0.1f\n", uv);
 
 	// return 0 if everything goes write
 	return 0;
