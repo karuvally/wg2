@@ -184,7 +184,7 @@ int print_weather_info(json_t *weather_json)
 
 	// print stuff
 	printf("City: %s,%s\n", city, country);
-	printf("Temp: %0.1f\n", temperature);
+	printf("Temp: %0.1f°C\n", temperature);
 	printf("Condition: %s\n", condition);
 	printf("UV Index %0.1f\n", uv);
 	printf("AQI: %d\n", aqi);
@@ -216,7 +216,7 @@ char *get_configuration()
 	sprintf(config_path, "/home/%s/.config/wg2rc", username); 
 
 	// read configuration from file
-	char *config_string = read_from_file("weather_url");
+	config_string = read_from_file(config_path);
 
 	// return stuff, (what did you expect?) 
 	return config_string;
@@ -229,8 +229,11 @@ int main()
 	// essential variables
 	const char *message_text;
 
+	// get configuration
+	char *config = get_configuration();
+
 	// fetch the weather data
-	char *weather_string = get_url(weather_url);
+	char *weather_string = get_url(config);
 
 	// create json object out of the retrieved data
 	json_t *weather_json = parse_json(weather_string);
