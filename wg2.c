@@ -212,7 +212,11 @@ char *get_configuration()
 	username = user_data->pw_name;
 
 	// generate config file path
-	// snprintf(config_path, "/home/%s/.config/wg2rc", username); 
+	config_path = malloc(strlen("/home//.config/wg2rc") + strlen(username) + 1);
+	sprintf(config_path, "/home/%s/.config/wg2rc", username); 
+
+	// read configuration from file
+	char *config_string = read_from_file("weather_url");
 
 	// return stuff, (what did you expect?) 
 	return config_string;
@@ -222,14 +226,8 @@ char *get_configuration()
 // the main function
 int main()
 {
-	//debug
-	get_configuration();
-
 	// essential variables
 	const char *message_text;
-
-	// read weather API string from file
-	char *weather_url = read_from_file("weather_url");
 
 	// fetch the weather data
 	char *weather_string = get_url(weather_url);
