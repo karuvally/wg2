@@ -205,13 +205,14 @@ char *get_configuration()
 
 	// get name of current user 
 	user_data = getpwuid(getuid());
-	if(user_date == NULL) {
+	if(user_data == NULL) {
 		printf("FATAL: Configuration file cannot be read!");
 		exit(1);
 	}
 	username = user_data->pw_name;
 
 	// generate config file path
+	// snprintf(config_path, "/home/%s/.config/wg2rc", username); 
 
 	// return stuff, (what did you expect?) 
 	return config_string;
