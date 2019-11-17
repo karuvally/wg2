@@ -6,6 +6,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<unistd.h>
+#include<pwd.h>
 #include<curl/curl.h>
 #include<jansson.h>
 
@@ -199,12 +200,12 @@ char *get_configuration()
 	// essential variables
 	char *config_str = NULL;
 	char *config_path = NULL;
-	struct passwd *usr_data;
+	char *username = NULL;
+	struct passwd *user_data;
 
 	// get name of current user 
-	usr_data = getpwuid(getuid());
-
-	printf("%s\n", usr_data->pw_name);
+	user_data = getpwuid(getuid());
+	username = user_data->pw_name;
 
 	// return stuff, (what did you expect?) 
 	return config_str;
@@ -214,6 +215,9 @@ char *get_configuration()
 // the main function
 int main()
 {
+	//debug
+	get_configuration();
+
 	// essential variables
 	const char *message_text;
 
@@ -221,10 +225,10 @@ int main()
 	char *weather_url = read_from_file("weather_url");
 
 	// fetch the weather data
-	char *weather_str = get_url(weather_url);
+	char *weather_string = get_url(weather_url);
 
 	// create json object out of the retrieved data
-	json_t *weather_json = parse_json(weather_str);
+	json_t *weather_json = parse_json(weather_string);
 
 	// print weather info to stdout
 	print_weather_info(weather_json);
