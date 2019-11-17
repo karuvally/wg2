@@ -5,6 +5,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<unistd.h>
 #include<curl/curl.h>
 #include<jansson.h>
 
@@ -159,7 +160,7 @@ int print_weather_info(json_t *weather_json)
 	tmp_object = json_object_get(weather, "country_code");
 	country = json_string_value(tmp_object);
 
-	// get city, print both city and country
+	// get city
 	tmp_object = json_object_get(weather, "city_name");
 	city = json_string_value(tmp_object);
 
@@ -192,6 +193,24 @@ int print_weather_info(json_t *weather_json)
 }
 
 
+// figure out default config path, read it
+char *get_configuration()
+{
+	// essential variables
+	char *config_str = NULL;
+	char *config_path = NULL;
+	struct passwd *usr_data;
+
+	// get name of current user 
+	usr_data = getpwuid(getuid());
+
+	printf("%s\n", usr_data->pw_name);
+
+	// return stuff, (what did you expect?) 
+	return config_str;
+}
+
+
 // the main function
 int main()
 {
@@ -202,10 +221,10 @@ int main()
 	char *weather_url = read_from_file("weather_url");
 
 	// fetch the weather data
-	char *weather_string = get_url(weather_url);
+	char *weather_str = get_url(weather_url);
 
 	// create json object out of the retrieved data
-	json_t *weather_json = parse_json(weather_string);
+	json_t *weather_json = parse_json(weather_str);
 
 	// print weather info to stdout
 	print_weather_info(weather_json);
