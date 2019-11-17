@@ -198,17 +198,23 @@ int print_weather_info(json_t *weather_json)
 char *get_configuration()
 {
 	// essential variables
-	char *config_str = NULL;
+	char *config_string = NULL;
 	char *config_path = NULL;
 	char *username = NULL;
 	struct passwd *user_data;
 
 	// get name of current user 
 	user_data = getpwuid(getuid());
+	if(user_date == NULL) {
+		printf("FATAL: Configuration file cannot be read!");
+		exit(1);
+	}
 	username = user_data->pw_name;
 
+	// generate config file path
+
 	// return stuff, (what did you expect?) 
-	return config_str;
+	return config_string;
 }
 
 
