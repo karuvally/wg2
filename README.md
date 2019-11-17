@@ -16,7 +16,6 @@ original app in pure C. And that's it, there is not much more to it :D
 - Proper makefile
 - Better documentation
 - Better configuration file
-- Move configuration to ~/.config
 - Command line argument support
 
 ## Authors
